@@ -19,13 +19,13 @@ def scpi_connect_serial(filename):
 def cmd(cmd_str):
     global fs
     sys.stderr.write(cmd_str+"\n")
-    fs.write(cmd_str)
-    fs.write("\r\n")
+    fs.write(str.encode(cmd_str))
+    fs.write(str.encode("\r\n"))
     fs.flush()
 
 def query(cmd_str):
     global fs
     cmd(cmd_str)
     line = fs.readline()
-    sys.stderr.write(line)
-    return line.strip('\n')
+    sys.stderr.write(line.decode())
+    return line.decode().strip('\n')
